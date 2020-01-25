@@ -8,7 +8,10 @@ class Modal extends Component {
   //changed to class to use lifecycle hooks to only update when modal is shown.
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.show !== this.props.show;
+    return (
+      nextProps.show !== this.props.show ||
+      nextProps.children !== this.props.children
+    );
   }
 
   // componentWillUpdate () {
