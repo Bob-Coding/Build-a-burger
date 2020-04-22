@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import Aux from "../../hoc/Aux/Aux";
-import Burger from "../Burger/Burger";
-import BuildControls from "../Burger/BuildControls/BuildControls";
-import Modal from "../UI/Modal/Modal";
-import ShoppingCart from "../ShoppingCart/ShoppingCart";
+import Burger from "../../Components/Burger/Burger";
+import BuildControls from "../../Components/Burger/BuildControls/BuildControls";
+import Modal from "../../Components/UI/Modal/Modal";
+import ShoppingCart from "../../Components/ShoppingCart/ShoppingCart";
 import axios from "../../axios-orders";
-import Spinner from "../UI/Spinner/Spinner";
-import withErrorHandler from "../UI/withErrorHandler/withErrorHandler";
+import Spinner from "../../Components/UI/Spinner/Spinner";
+import withErrorHandler from "../../Components/UI/withErrorHandler/withErrorHandler";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
   bacon: 0.7,
   cheese: 0.4,
-  meat: 1.3
+  meat: 1.3,
 };
 
 class BurgerBuilder extends Component {
@@ -22,23 +22,23 @@ class BurgerBuilder extends Component {
     purchasable: false,
     purchasing: false,
     loading: false,
-    error: false
+    error: false,
   };
 
   componentDidMount() {
     axios
       .get("https://burger-builder-26bd8.firebaseio.com/ingredients.json")
-      .then(response => {
+      .then((response) => {
         this.setState({ ingredients: response.data });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ error: true });
       });
   }
 
-  updatePurchasableState = ingredients => {
+  updatePurchasableState = (ingredients) => {
     const sum = Object.keys(ingredients)
-      .map(igKey => {
+      .map((igKey) => {
         return ingredients[igKey];
       })
       .reduce((sum, el) => {
@@ -65,27 +65,27 @@ class BurgerBuilder extends Component {
         address: {
           street: "Teststreet 1",
           zipCode: "41351",
-          country: "Germany"
+          country: "Germany",
         },
-        email: "test@test.com"
+        email: "test@test.com",
       },
-      deliveryMethod: "fastest"
+      deliveryMethod: "fastest",
     };
     axios
       .post("/orders.json", order)
-      .then(response => {
+      .then((response) => {
         this.setState({ loading: false, purchasing: false });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ loading: false, purchasing: false });
       });
   };
 
-  addIngredientHandler = type => {
+  addIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
     const updatedCount = oldCount + 1;
     const updatedIngredients = {
-      ...this.state.ingredients
+      ...this.state.ingredients,
     };
     updatedIngredients[type] = updatedCount;
     const priceAddition = INGREDIENT_PRICES[type];
@@ -95,14 +95,14 @@ class BurgerBuilder extends Component {
     this.updatePurchasableState(updatedIngredients);
   };
 
-  removeIngredientHandler = type => {
+  removeIngredientHandler = (type) => {
     const oldCount = this.state.ingredients[type];
     // if (oldCount <= 0) {
     //   return;
     // }
     const updatedCount = oldCount - 1;
     const updatedIngredients = {
-      ...this.state.ingredients
+      ...this.state.ingredients,
     };
     updatedIngredients[type] = updatedCount;
     const priceDeduction = INGREDIENT_PRICES[type];
@@ -114,7 +114,7 @@ class BurgerBuilder extends Component {
 
   render() {
     const disabledInfo = {
-      ...this.state.ingredients
+      ...this.state.ingredients,
     };
     for (let key in disabledInfo) {
       disabledInfo[key] = disabledInfo[key] <= 0;
