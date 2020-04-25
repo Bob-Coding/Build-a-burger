@@ -6,7 +6,7 @@ import Modal from "../../Components/UI/Modal/Modal";
 import ShoppingCart from "../../Components/ShoppingCart/ShoppingCart";
 import axios from "../../axios-orders";
 import Spinner from "../../Components/UI/Spinner/Spinner";
-import withErrorHandler from "../../Components/UI/withErrorHandler/withErrorHandler";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
