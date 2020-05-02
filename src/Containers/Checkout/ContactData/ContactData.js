@@ -7,7 +7,7 @@ import axios from "../../../axios-orders";
 import Spinner from "../../../Components/UI/Spinner/Spinner";
 import Input from "../../../Components/UI/Input/Input";
 import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
-import * as actions from "../../../store/actions/order";
+import * as actions from "../../../store/actions/index";
 
 class ContactData extends Component {
   state = {
@@ -97,7 +97,6 @@ class ContactData extends Component {
 
   orderHandler = (event) => {
     event.preventDefault();
-    this.setState({ loading: true });
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[
@@ -193,9 +192,9 @@ class ContactData extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ings: state.ingredients,
-    price: state.totalPrice,
-    loading: state.loading,
+    ings: state.burgerBuilder.ingredients,
+    price: state.burgerBuilder.totalPrice,
+    loading: state.order.loading,
   };
 };
 
