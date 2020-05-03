@@ -40,7 +40,7 @@ class Auth extends Component {
         touched: false,
       },
     },
-    isSignup: true,
+    isSignup: false,
   };
 
   checkValidity(value, rules) {
@@ -153,7 +153,9 @@ class Auth extends Component {
           </Button>
         </form>
         <Button clicked={this.switchAuthModeHandler} btnType="Danger">
-          SWITCH TO {this.state.isSignup ? "LOGIN" : "REGISTER NEW ACCOUNT"}
+          {this.state.isSignup
+            ? "ALREADY GOT AN ACCOUNT? CLICK HERE TO LOGIN"
+            : "NOT AN ACCOUNT YET? CLICK HERE TO REGISTER"}
         </Button>
       </div>
     );
