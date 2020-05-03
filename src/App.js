@@ -6,6 +6,7 @@ import BurgerBuilder from "./Containers/BurgerBuilder/BurgerBuilder";
 import Checkout from "./Containers/Checkout/Checkout";
 import Orders from "./Containers/Orders/Orders";
 import Auth from "./Containers/Auth/Auth";
+import Logout from "./Containers/Auth/Logout/Logout";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Switch>
           <Route path="/checkout" component={Checkout} />
           <Route path="/orders" component={Orders} />
-          <Route path="/Auth" component={Auth} />
+          <Route path="/auth" component={Auth} />
+          <Route path="/logout" component={Logout} />
           <Route path="/" exact component={BurgerBuilder} />
         </Switch>
       </Layout>
